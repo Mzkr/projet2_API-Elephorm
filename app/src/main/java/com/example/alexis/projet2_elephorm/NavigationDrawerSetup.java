@@ -30,6 +30,7 @@ public class NavigationDrawerSetup extends AppCompatActivity {
         mtoolbar = toolbar;
         mDrawer = drawerLayout;
         activity = currentActivity;
+        nvView = navView;
         setSupportActionBar(toolbar);
         ArrayList<String> runningactivities = new ArrayList<String>();
 
@@ -44,8 +45,10 @@ public class NavigationDrawerSetup extends AppCompatActivity {
 
         if(runningactivities.contains("ComponentInfo{com.example.alexis.projet2_elephorm/com.example.alexis.projet2_elephorm.MainActivity}")==true){
             actualItemMenu = "formations";
-        }else if(runningactivities.contains("ComponentInfo{com.example.alexis.projet2_elephorm/com.example.alexis.projet2_elephorm.SecondActivity}")==true){
+            nvView.getMenu().getItem(0).setChecked(true);
+        }else if(runningactivities.contains("ComponentInfo{com.example.alexis.projet2_elephorm/com.example.alexis.projet2_elephorm.CreationsActivity}")==true){
             actualItemMenu = "créations";
+            nvView.getMenu().getItem(1).setChecked(true);
         }else{
             actualItemMenu = "other";
         }
@@ -69,20 +72,6 @@ public class NavigationDrawerSetup extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void selectItem(int position){
-        Intent intent;
-        switch (position) {
-            case 0:
-                Log.d("•••••", "position" + position);
-                //intent = new Intent(activity, SecondActivity.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //activity.startActivity(intent);
-            case 1:
-                Log.d("•••••", "position" + position);
-        }
-    }
-
 
     public void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
@@ -110,29 +99,26 @@ public class NavigationDrawerSetup extends AppCompatActivity {
 
 
         switch(menuItem.getItemId()) {
-            case R.id.nav_first_fragment:
+            case R.id.nav_first_item:
                 mDrawer.closeDrawers();
-                if(runningactivities.contains("ComponentInfo{com.example.alexis.projet2_elephorm/com.example.alexis.projet2_elephorm.MainActivity}")==true){
+                if(actualItemMenu=="formations"){
                     break;
                 }
                 intent = new Intent(activity, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 activity.startActivity(intent);
                 break;
-            case R.id.nav_second_fragment:
+            case R.id.nav_second_item:
                 mDrawer.closeDrawers();
-                if(runningactivities.contains("ComponentInfo{com.example.alexis.projet2_elephorm/com.example.alexis.projet2_elephorm.SecondActivity}")==true){
+                if(actualItemMenu=="créations"){
                     break;
                 }
-                intent = new Intent(activity, SecondActivity.class);
+                intent = new Intent(activity, CreationsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 activity.startActivity(intent);
                 break;
-            case R.id.nav_third_fragment:
+            case R.id.nav_third_item:
                 mDrawer.closeDrawers();
-                //if(runningactivities.contains("ComponentInfo{com.example.alexis.projet2_elephorm/com.example.alexis.projet2_elephorm.thirdActivityName}")==true){
-                //    break;
-                //}
                 //intent = new Intent(activity, thirdActivityName.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //activity.startActivity(intent);

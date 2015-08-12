@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class SecondActivity extends NavigationDrawerSetup {
+public class CreationsActivity extends NavigationDrawerSetup {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView navView;
@@ -25,7 +25,7 @@ public class SecondActivity extends NavigationDrawerSetup {
         // Find our navigation view
         navView = (NavigationView) findViewById(R.id.nvView);
 
-        configureDrawer(toolbar, mDrawer, SecondActivity.this, navView);
+        configureDrawer(toolbar, mDrawer, CreationsActivity.this, navView);
         setupDrawerContent(navView);
 
     }

@@ -1,27 +1,18 @@
 package com.example.alexis.projet2_elephorm;
 
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -30,6 +21,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.alexis.projet2_elephorm.adapter.CustomListAdapter;
 import com.example.alexis.projet2_elephorm.app.AppController;
 import com.example.alexis.projet2_elephorm.model.Formation;
+import com.parse.Parse;
+import com.parse.ParseObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +51,10 @@ public class MainActivity extends NavigationDrawerSetup {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Enable Parse Local Datastore.
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "rsIDryMUnerM24FHe18nkrNvVL3FenBncF94AAtT", "HJolOJ4h4cweliqcNJDXqS58XyEK34a2MFItk24o");
+
         setContentView(R.layout.activity_main);
         setTitle(R.string.title_activity_main);
 
