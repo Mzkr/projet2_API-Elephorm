@@ -1,17 +1,14 @@
 package com.example.alexis.projet2_elephorm;
 
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends NavigationDrawerSetup {
+public class SecondActivity extends NavigationDrawerSetup {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView navView;
@@ -20,7 +17,6 @@ public class MainActivity extends NavigationDrawerSetup {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle(R.string.title_activity_main);
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -29,7 +25,7 @@ public class MainActivity extends NavigationDrawerSetup {
         // Find our navigation view
         navView = (NavigationView) findViewById(R.id.nvView);
 
-        configureDrawer(toolbar, mDrawer, MainActivity.this, navView);
+        configureDrawer(toolbar, mDrawer, SecondActivity.this, navView);
         setupDrawerContent(navView);
 
     }
