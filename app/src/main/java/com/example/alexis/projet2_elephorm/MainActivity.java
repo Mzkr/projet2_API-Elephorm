@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,9 +19,8 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.alexis.projet2_elephorm.adapter.CustomListAdapter;
 import com.example.alexis.projet2_elephorm.app.AppController;
-import com.example.alexis.projet2_elephorm.model.Formation;
+import com.example.alexis.projet2_elephorm.model.Category;
 import com.parse.Parse;
-import com.parse.ParseObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,7 +41,7 @@ public class MainActivity extends NavigationDrawerSetup {
     private static final String url = "http://eas.elephorm.com/api/v1/categories";
     private static final String ALL_CAT = "AllCategory";
     private ProgressDialog pDialog;
-    private List<Formation> formationsList = new ArrayList<Formation>();
+    private List<Category> formationsList = new ArrayList<Category>();
     private ListView listView;
     private CustomListAdapter adapter;
     private SharedPreferences preferences;
@@ -85,7 +83,7 @@ public class MainActivity extends NavigationDrawerSetup {
             @Override
             public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
                 CustomListAdapter ca = (CustomListAdapter)parent.getAdapter();
-                Formation woid = (Formation)ca.getItem(position);
+                Category woid = (Category)ca.getItem(position);
 
                 Intent i = new Intent(MainActivity.this, CategoryMain.class);
                 i.putExtra("idCat", woid.getId());
@@ -118,7 +116,7 @@ public class MainActivity extends NavigationDrawerSetup {
                             try {
 
                                 JSONObject obj = response.getJSONObject(i);
-                                Formation formation = new Formation();
+                                Category formation = new Category();
                                 formation.setId(obj.getString("_id"));
                                 formation.setTitle(obj.getString("title"));
                                 formation.setDescription(obj.getString("description"));

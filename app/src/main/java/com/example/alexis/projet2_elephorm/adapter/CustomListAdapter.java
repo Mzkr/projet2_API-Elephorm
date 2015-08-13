@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.example.alexis.projet2_elephorm.model.Formation;
-import com.example.alexis.projet2_elephorm.app.AppController;
+import com.example.alexis.projet2_elephorm.model.Category;
 import com.example.alexis.projet2_elephorm.R;
 
 import java.util.List;
@@ -23,9 +21,9 @@ import java.util.List;
 public class CustomListAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
-    private List<Formation> formationsItems;
+    private List<Category> formationsItems;
 
-    public CustomListAdapter(Activity activity, List<Formation> formationsItems) {
+    public CustomListAdapter(Activity activity, List<Category> formationsItems) {
         this.activity = activity;
         this.formationsItems = formationsItems;
     }
@@ -59,7 +57,7 @@ public class CustomListAdapter extends BaseAdapter {
 
 
         // getting movie data for the row
-        Formation m = formationsItems.get(position);
+        Category m = formationsItems.get(position);
 
         // title
         title.setText(m.getTitle());

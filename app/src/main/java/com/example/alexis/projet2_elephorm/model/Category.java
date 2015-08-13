@@ -5,13 +5,13 @@ import java.util.ArrayList;
 /**
  * Created by Alexis on 10/08/2015.
  */
-public class Formation {
+public class Category {
     private String id, title, description;
 
-    public Formation() {
+    public Category() {
     }
 
-    public Formation(String id,String name, String description) {
+    public Category(String id, String name, String description) {
         this.id = id;
         this.title = name;
         this.description = description;

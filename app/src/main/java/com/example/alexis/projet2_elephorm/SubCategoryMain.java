@@ -11,11 +11,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.alexis.projet2_elephorm.app.AppController;
-import com.example.alexis.projet2_elephorm.model.Formation;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by Alexis on 13/08/2015.
