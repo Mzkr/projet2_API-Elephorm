@@ -24,7 +24,6 @@ public class CustomListAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
     private List<Formation> formationsItems;
-    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
     public CustomListAdapter(Activity activity, List<Formation> formationsItems) {
         this.activity = activity;
@@ -55,8 +54,6 @@ public class CustomListAdapter extends BaseAdapter {
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_row, null);
 
-        if (imageLoader == null)
-            imageLoader = AppController.getInstance().getImageLoader();
         TextView title = (TextView) convertView.findViewById(R.id.title);
         TextView description = (TextView) convertView.findViewById(R.id.description);
 
