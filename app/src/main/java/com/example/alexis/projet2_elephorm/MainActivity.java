@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,6 +21,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.alexis.projet2_elephorm.adapter.CustomListAdapter;
 import com.example.alexis.projet2_elephorm.app.AppController;
 import com.example.alexis.projet2_elephorm.model.Formation;
+import com.parse.Parse;
+import com.parse.ParseObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +50,10 @@ public class MainActivity extends NavigationDrawerSetup {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Enable Parse Local Datastore.
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "rsIDryMUnerM24FHe18nkrNvVL3FenBncF94AAtT", "HJolOJ4h4cweliqcNJDXqS58XyEK34a2MFItk24o");
+
         setContentView(R.layout.activity_main);
         setTitle(R.string.title_activity_main);
 
