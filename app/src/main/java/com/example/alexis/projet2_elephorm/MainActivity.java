@@ -116,14 +116,14 @@ public class MainActivity extends NavigationDrawerSetup {
                             try {
 
                                 JSONObject obj = response.getJSONObject(i);
-                                Category formation = new Category();
-                                formation.setId(obj.getString("_id"));
-                                formation.setTitle(obj.getString("title"));
-                                formation.setDescription(obj.getString("description"));
+                                Category category = new Category();
+                                category.setId(obj.getString("_id"));
+                                category.setTitle(obj.getString("title"));
+                                category.setDescription(obj.getString("description"));
 
 
                                 // adding movie to movies array
-                                formationsList.add(formation);
+                                formationsList.add(category);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
