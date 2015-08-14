@@ -62,8 +62,6 @@ public class NavigationDrawerSetup extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("•••••", "click on " + item);
-        // The action bar home/up action should open or close the drawer.
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawer.openDrawer(GravityCompat.START);
@@ -105,7 +103,7 @@ public class NavigationDrawerSetup extends AppCompatActivity {
                     break;
                 }
                 intent = new Intent(activity, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 activity.startActivity(intent);
                 break;
             case R.id.nav_second_item:
@@ -114,13 +112,13 @@ public class NavigationDrawerSetup extends AppCompatActivity {
                     break;
                 }
                 intent = new Intent(activity, CreationsActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 activity.startActivity(intent);
                 break;
             case R.id.nav_third_item:
                 mDrawer.closeDrawers();
                 //intent = new Intent(activity, thirdActivityName.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 //activity.startActivity(intent);
                 break;
             default:
