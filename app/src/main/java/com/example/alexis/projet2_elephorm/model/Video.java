@@ -4,7 +4,7 @@ package com.example.alexis.projet2_elephorm.model;
  * Created by Alexis on 27/08/2015.
  */
 public class Video {
-    private String id, title, field_vignette,field_video;
+    private String id, title, field_vignette,field_video,type;
     private int duration;
 
     public Video() {
@@ -12,12 +12,13 @@ public class Video {
 
     public Video(String id, String name, String field_vignette,
                      Integer duration,
-                     String field_video) {
+                     String field_video, String type) {
         this.id = id;
         this.title = name;
         this.field_vignette = field_vignette;
         this.duration = duration;
         this.field_video = field_video;
+        this.type = type;
 
     }
 
@@ -48,6 +49,10 @@ public class Video {
     public String getField_video() {  return field_video;  }
 
     public void setField_video(String field_video) { this.field_video = field_video; }
+
+    public String getType() {  return type;  }
+
+    public void setType(String type) { this.type = type; }
 
 }
 

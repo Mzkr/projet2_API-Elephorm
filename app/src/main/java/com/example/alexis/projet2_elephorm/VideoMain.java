@@ -22,7 +22,7 @@ public class VideoMain  extends Activity {
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
-        pDialog.setMessage(urlVideo);
+        pDialog.setMessage("Loading...");
         pDialog.show();
 
         VideoView teaser =(VideoView)findViewById(R.id.video_view);
@@ -30,7 +30,7 @@ public class VideoMain  extends Activity {
         teaser.setMediaController(media_Controller);
         teaser.setVideoPath(urlVideo);
         teaser.start();
-
+        hidePDialog();
     }
 
     public void onDestroy() {

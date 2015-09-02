@@ -51,12 +51,12 @@ public class CustomVideoAdapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.list_video, null);
 
         TextView title = (TextView) convertView.findViewById(R.id.title);
-        TextView url = (TextView) convertView.findViewById(R.id.url);
+        TextView type = (TextView) convertView.findViewById(R.id.type);
 
         Video m = formationsItems.get(position);
 
         title.setText(m.getTitle());
-        url.setText(m.getField_video());
+        type.setText(m.getType());
 
         return convertView;
     }

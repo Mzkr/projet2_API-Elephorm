@@ -112,6 +112,7 @@ public class SubCategoryMain extends Activity {
                                     Video video = new Video();
                                     JSONObject item = jrItems.getJSONObject(i);
                                     video.setTitle(item.getString("title"));
+                                    video.setType(item.getString("type"));
                                     //url de vidéo
                                     if(item.getString("field_video") != "[]" && item.getString("field_video") != null) {
                                         JSONArray jrVideo = item.getJSONArray("field_video");
