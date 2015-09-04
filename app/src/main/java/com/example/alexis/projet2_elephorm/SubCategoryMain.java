@@ -3,7 +3,9 @@ package com.example.alexis.projet2_elephorm;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,6 +44,8 @@ public class SubCategoryMain extends Activity {
     private List<Video> formationsListVideo = new ArrayList<Video>();
     private CustomFormationAdapter adapter;
     private CustomVideoAdapter videoAdapter;
+    private static final String STORAGE_DATA = "storageData";
+    private SharedPreferences storageDataVideo;
 
     private static String urlFinal = "";
     private ProgressDialog pDialog;
@@ -53,7 +57,6 @@ public class SubCategoryMain extends Activity {
         Bundle extras = getIntent().getExtras();
         final String id = extras.getString("idSubCat");
         urlFinal = url.concat(id).concat("/trainings");
-
         listView = (ListView) findViewById(R.id.formation);
         listViewVideo = (ListView) findViewById(R.id.videoList);
         adapter = new CustomFormationAdapter(this, formationsList);
@@ -92,10 +95,9 @@ public class SubCategoryMain extends Activity {
 
                             JSONObject obj = response.getJSONObject(0);
                             Formation formation = new Formation();
-                                //formation.setId(obj.getString("_id"));
                                 formation.setTitle(obj.getString("title"));
-                                formation.setDescription(obj.getString("description"));
                                 formation.setSubtitle(obj.getString("subtitle"));
+                                formation.setDescription(obj.getString("description"));
                                 formation.setProduct_url(obj.getString("product_url"));
                                 formation.setEan13(obj.getString("ean13"));
                                 formation.setPrice(obj.getInt("price"));
@@ -111,20 +113,24 @@ public class SubCategoryMain extends Activity {
                                 for(int i=0;i<jrItems.length();i++) {
                                     Video video = new Video();
                                     JSONObject item = jrItems.getJSONObject(i);
+                                    video.setId(item.getString("_id"));
                                     video.setTitle(item.getString("title"));
                                     video.setType(item.getString("type"));
                                     //url de vidéo
                                     if(item.getString("field_video") != "[]" && item.getString("field_video") != null) {
                                         JSONArray jrVideo = item.getJSONArray("field_video");
-
+                                        Boolean pathExist = false;
                                         for (int j = 0; j < jrVideo.length(); j++){
                                             JSONObject objVideo = jrVideo.getJSONObject(j);
                                             video.setField_video(objVideo.getString("filepath"));
+                                            if(objVideo.getString("filepath") != null && objVideo.getString("filepath") != ""){
+                                                pathExist = true;
+                                            }
                                         }
-                                    }else{
-                                        video.setField_video("");
+                                        if(pathExist){
+                                            formationsListVideo.add(video);
+                                        }
                                     }
-                                    formationsListVideo.add(video);
                                 }
 
                                 //récupération de l'image taille moyenne
@@ -138,9 +144,54 @@ public class SubCategoryMain extends Activity {
                                 // adding formation to formation array
                                 formationsList.add(formation);
 
-                               // tv.setText("Hello, " + obj.getString("poster") + " !!");
-                               // setContentView(tv);
+                            // stockage des id de categories dans les sharedpref
+                            SharedPreferences.Editor editor = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE).edit();
+                            storageDataVideo = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE);
+                            String listVideoView = storageDataVideo.getString("ObjetVideoView", null);
 
+                            if (!listVideoView.equals("") ) {
+                                    JSONObject objVideo = new JSONObject(listVideoView);
+                                    Boolean catExist = false;
+                                    Boolean subCatExist = false;
+                                    for (Iterator iterator = objVideo.keys(); iterator.hasNext();) {
+                                        Object cle = iterator.next();
+                                        Object val = objVideo.get(String.valueOf(cle));
+                                        if(cle == obj.getString("category")){
+                                            catExist = true;
+                                            JSONObject objSubCat = new JSONObject((String) val);
+                                            for (Iterator iterator2 = objSubCat.keys(); iterator2.hasNext();) {
+                                                Object cleSubCat = iterator2.next();
+                                                if (cleSubCat == obj.getString("subcategory")) {
+                                                    subCatExist = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if(catExist && !subCatExist){
+                                        JSONObject thisCat =  objVideo.getJSONObject(obj.getString("category"));
+                                        thisCat.put(obj.getString("subcategory"),"");
+                                    }else{
+                                        JSONObject sbCat = new JSONObject();
+                                        sbCat.put(obj.getString("subcategory"), "");
+                                        JSONArray jaVideo = new JSONArray();
+                                        jaVideo.put(sbCat);
+                                        //création objet final pour sharedPref
+                                        objVideo.put(obj.getString("category"),jaVideo);
+                                        editor.putString("ObjetVideoView", String.valueOf(objVideo));
+                                        editor.commit();
+                                    }
+                                }else {
+                                    //création array des sous-cat pour id vidéo
+                                    JSONObject sbCat = new JSONObject();
+                                    sbCat.put(obj.getString("subcategory"), "");
+                                    JSONArray jaVideo = new JSONArray();
+                                    jaVideo.put(sbCat);
+                                    //création objet final pour sharedPref
+                                    JSONObject objVideo = new JSONObject();
+                                    objVideo.put(obj.getString("category"),jaVideo);
+                                    editor.putString("ObjetVideoView", String.valueOf(objVideo));
+                                    editor.commit();
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

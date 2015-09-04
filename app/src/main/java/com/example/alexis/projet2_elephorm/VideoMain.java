@@ -2,7 +2,9 @@ package com.example.alexis.projet2_elephorm;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -12,6 +14,8 @@ import android.widget.VideoView;
 public class VideoMain  extends Activity {
     private ProgressDialog pDialog;
     private MediaController media_Controller;
+    private static final String STORAGE_DATA = "storageData";
+    private SharedPreferences storageDataVideo;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,15 @@ public class VideoMain  extends Activity {
         teaser.setVideoPath(urlVideo);
         teaser.start();
         hidePDialog();
+
+        // stockage des id de categories dans les sharedpref
+        SharedPreferences.Editor editor = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE).edit();
+        storageDataVideo = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE);
+        String listVideoView = storageDataVideo.getString("ObjetVideoView", null);
+        Log.i("???§§§§§",listVideoView);
+        if (!listVideoView.equals("") ) {
+
+        }
     }
 
     public void onDestroy() {
