@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,6 +13,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.parse.ParseObject;
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -32,8 +34,8 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        //return creationsList.size();
-        return mThumbIds.length;
+        return creationsList.size();
+        //return mThumbIds.length;
     }
 
     public Object getItem(int position) {
@@ -50,7 +52,7 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams((int) mContext.getResources().getDimension(R.dimen.creation_thumb_width), (int) mContext.getResources().getDimension(R.dimen.creation_thumb_height)));
+            //imageView.setLayoutParams(new GridView.LayoutParams((int) mContext.getResources().getDimension(R.dimen.creation_thumb_width), (int) mContext.getResources().getDimension(R.dimen.creation_thumb_height)));
             //imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(0,0,0,0);
@@ -59,15 +61,17 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         try {
-            URL url = new URL(creationsList.get(position).getString("url"));
-            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            imageView.setImageBitmap(bmp);
+            //URL url = new URL(creationsList.get(position).getString("url"));
+            //Picasso.with(mContext).load(creationsList.get(position).getString("url")).centerCrop().into(imageView);
+            Picasso.with(mContext).load(creationsList.get(position).getString("url")).resize((int) mContext.getResources().getDimension(R.dimen.creation_thumb_width), (int) mContext.getResources().getDimension(R.dimen.creation_thumb_height)).centerCrop().into(imageView);
+            //Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            //imageView.setImageBitmap(bmp);
         }catch(Exception e){
-
+            Log.d("•••••", "message : " + e.getMessage());
         }
 
 
-        imageView.setImageResource(mThumbIds[position]);
+        //imageView.setImageResource(mThumbIds[position]);
         return imageView;
     }
 

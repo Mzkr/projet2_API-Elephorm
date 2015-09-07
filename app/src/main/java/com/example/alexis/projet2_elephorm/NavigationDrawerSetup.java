@@ -12,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,9 +120,16 @@ public class NavigationDrawerSetup extends AppCompatActivity {
                 break;
             case R.id.nav_third_item:
                 mDrawer.closeDrawers();
-                //intent = new Intent(activity, thirdActivityName.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                //activity.startActivity(intent);
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                if (currentUser != null) {
+                    intent = new Intent(activity, AccountActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    activity.startActivity(intent);
+                } else {
+                    intent = new Intent(activity, ConnexionActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    activity.startActivity(intent);
+                }
                 break;
             default:
         }
