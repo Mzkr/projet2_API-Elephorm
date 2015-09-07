@@ -4,7 +4,7 @@ package com.example.alexis.projet2_elephorm.model;
  * Created by Alexis on 13/08/2015.
  */
 public class Formation {
-    private String id, title,subtitle, description,product_url,teaser_text,teaser,qcm,objectives,ean13,publishedDate,poster;
+    private String id, title,subtitle, description,product_url,teaser_text,teaser,qcm,objectives,ean13,publishedDate,poster,items;
     private int price,duration;
 
     public Formation() {
@@ -13,7 +13,7 @@ public class Formation {
     public Formation(String id, String name, String description, String subtitle,
                      String product_url, String ean13, Integer price, Integer duration,
                      String objectives, String qcm, String teaser, String teaser_text,
-                     String publishedDate, String poster) {
+                     String publishedDate, String poster, String items) {
         this.id = id;
         this.title = name;
         this.subtitle = subtitle;
@@ -28,6 +28,7 @@ public class Formation {
         this.teaser = teaser;
         this.publishedDate = publishedDate;
         this.poster = poster;
+        this.items = items;
         // reste image category et subcat
 
     }
@@ -82,7 +83,7 @@ public class Formation {
 
     public String getTeaser() {  return teaser;  }
 
-    public void setTeaser(String objectives) { this.teaser = teaser; }
+    public void setTeaser(String teaser) { this.teaser = teaser; }
 
     public String getPublishedDate() {  return publishedDate;  }
 
@@ -95,5 +96,9 @@ public class Formation {
     public String getObjectives() {  return objectives;  }
 
     public void setObjectives(String objectives) { this.objectives = objectives; }
+
+    public String getItems() {  return items;  }
+
+    public void setItems(String items) { this.items = items; }
 
 }

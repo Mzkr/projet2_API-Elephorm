@@ -67,12 +67,6 @@ public class MainActivity extends NavigationDrawerSetup {
         //sharedPref = GET toute les category
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         final String all_cat = preferences.getString("ALL_CAT", "");
-        if (!all_cat.equals("") ) {
-
-        }
-        else {
-
-        }
 
         listView = (ListView) findViewById(R.id.list);
         adapter = new CustomListAdapter(this, formationsList);
@@ -102,7 +96,7 @@ public class MainActivity extends NavigationDrawerSetup {
 
         // Creating volley request obj
         JsonArrayRequest formationReq = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
+                        new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, response.toString());
@@ -160,20 +154,6 @@ public class MainActivity extends NavigationDrawerSetup {
             pDialog = null;
         }
     }
-
-
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // The action bar home/up action should open or close the drawer.
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                mDrawer.openDrawer(GravityCompat.START);
-//                return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
