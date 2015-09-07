@@ -47,6 +47,9 @@ public class SubCategoryMain extends Activity {
     private static final String STORAGE_DATA = "storageData";
     private SharedPreferences storageDataVideo;
 
+    private String idCat = null;
+    private String idSubCat = null;
+
     private static String urlFinal = "";
     private ProgressDialog pDialog;
 
@@ -74,6 +77,9 @@ public class SubCategoryMain extends Activity {
                 if(woid.getField_video() != "") {
                     Intent i = new Intent(SubCategoryMain.this, VideoMain.class);
                     i.putExtra("urlVideo", woid.getField_video());
+                    i.putExtra("idVideo", woid.getId());
+                    i.putExtra("idCat", idCat);
+                    i.putExtra("idSubCat", idSubCat);
                     startActivity(i);
                 }
             }
@@ -95,6 +101,8 @@ public class SubCategoryMain extends Activity {
 
                             JSONObject obj = response.getJSONObject(0);
                             Formation formation = new Formation();
+                                idCat = obj.getString("category");
+                                idSubCat = obj.getString("subcategory");
                                 formation.setTitle(obj.getString("title"));
                                 formation.setSubtitle(obj.getString("subtitle"));
                                 formation.setDescription(obj.getString("description"));
@@ -148,7 +156,6 @@ public class SubCategoryMain extends Activity {
                             SharedPreferences.Editor editor = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE).edit();
                             storageDataVideo = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE);
                             String listVideoView = storageDataVideo.getString("ObjetVideoView", null);
-
                             if (!listVideoView.equals("") ) {
                                     JSONObject objVideo = new JSONObject(listVideoView);
                                     Boolean catExist = false;
@@ -156,21 +163,31 @@ public class SubCategoryMain extends Activity {
                                     for (Iterator iterator = objVideo.keys(); iterator.hasNext();) {
                                         Object cle = iterator.next();
                                         Object val = objVideo.get(String.valueOf(cle));
-                                        if(cle == obj.getString("category")){
+                                        if(cle.equals(obj.getString("category"))){
                                             catExist = true;
-                                            JSONObject objSubCat = new JSONObject((String) val);
-                                            for (Iterator iterator2 = objSubCat.keys(); iterator2.hasNext();) {
-                                                Object cleSubCat = iterator2.next();
-                                                if (cleSubCat == obj.getString("subcategory")) {
-                                                    subCatExist = true;
+                                            JSONArray objSubCat = new JSONArray(String.valueOf(val));
+                                            for (int i = 0; i < objSubCat.length(); i++) {
+                                                JSONObject row = objSubCat.getJSONObject(i);
+                                                for (Iterator iterator2 = row.keys(); iterator2.hasNext();) {
+                                                    Object cleSubCat = iterator2.next();
+                                                    if (cleSubCat.equals(obj.getString("subcategory"))) {
+                                                        subCatExist = true;
+                                                    }
                                                 }
                                             }
                                         }
                                     }
+
                                     if(catExist && !subCatExist){
-                                        JSONObject thisCat =  objVideo.getJSONObject(obj.getString("category"));
-                                        thisCat.put(obj.getString("subcategory"),"");
-                                    }else{
+                                        JSONArray thisCatList =  objVideo.getJSONArray(obj.getString("category"));
+                                        JSONObject thisCatObj = new JSONObject();
+                                        thisCatObj.put(obj.getString("subcategory"), "");
+                                        thisCatList.put(thisCatObj);
+                                        objVideo.put(obj.getString("category"),thisCatList);
+                                        editor.putString("ObjetVideoView", String.valueOf(objVideo));
+                                        editor.commit();
+
+                                    }else if(!catExist){
                                         JSONObject sbCat = new JSONObject();
                                         sbCat.put(obj.getString("subcategory"), "");
                                         JSONArray jaVideo = new JSONArray();
