@@ -133,6 +133,11 @@ public class NavigationDrawerSetup extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     activity.startActivity(intent);
                 }
+                break;case R.id.nav_fourth_item:
+                mDrawer.closeDrawers();
+                intent = new Intent(activity, HistoriqueMain.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                activity.startActivity(intent);
                 break;
             default:
         }
