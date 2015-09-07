@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +28,11 @@ import java.util.List;
 /**
  * Created by Alexis on 11/08/2015.
  */
-public class CategoryMain extends Activity {
+public class CategoryMain extends NavigationDrawerSetup {
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar;
+    private NavigationView navView;
+
     private SharedPreferences preferences;
     private CustomListAdapter adapter;
     private List<Category> formationsListSubCat = new ArrayList<Category>();
@@ -35,6 +42,17 @@ public class CategoryMain extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_main);
+        setTitle(R.string.title_Category_main);
+        // Set a Toolbar to replace the ActionBar.
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Find our drawer view
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // Find our navigation view
+        navView = (NavigationView) findViewById(R.id.nvView);
+
+        configureDrawer(toolbar, mDrawer, CategoryMain.this, navView);
+        setupDrawerContent(navView);
+
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String all_cat = preferences.getString("ALL_CAT", "");
         Bundle extras = getIntent().getExtras();

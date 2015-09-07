@@ -5,6 +5,9 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.MediaController;
 import android.widget.VideoView;
@@ -18,7 +21,11 @@ import java.util.Iterator;
 /**
  * Created by Alexis on 01/09/2015.
  */
-public class VideoMain  extends Activity {
+public class VideoMain  extends NavigationDrawerSetup {
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar;
+    private NavigationView navView;
+
     private ProgressDialog pDialog;
     private MediaController media_Controller;
     private static final String STORAGE_DATA = "storageData";
@@ -27,6 +34,17 @@ public class VideoMain  extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_main);
+        setTitle(R.string.title_video_main);
+        // Set a Toolbar to replace the ActionBar.
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Find our drawer view
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // Find our navigation view
+        navView = (NavigationView) findViewById(R.id.nvView);
+
+        configureDrawer(toolbar, mDrawer, VideoMain.this, navView);
+        setupDrawerContent(navView);
+
         Bundle extras = getIntent().getExtras();
         final String idVideo = extras.getString("idVideo");
         String urlVideo = extras.getString("urlVideo");

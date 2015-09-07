@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,7 +36,10 @@ import java.util.List;
 /**
  * Created by Alexis on 13/08/2015.
  */
-public class SubCategoryMain extends Activity {
+public class SubCategoryMain extends NavigationDrawerSetup {
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar;
+    private NavigationView navView;
 
     private static final String TAG = SubCategoryMain.class.getSimpleName();
     private static final String url = "http://eas.elephorm.com/api/v1/subcategories/";
@@ -56,6 +62,16 @@ public class SubCategoryMain extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sub_category_main);
+        setTitle(R.string.title_SubCategory_main);
+        // Set a Toolbar to replace the ActionBar.
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Find our drawer view
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // Find our navigation view
+        navView = (NavigationView) findViewById(R.id.nvView);
+
+        configureDrawer(toolbar, mDrawer, SubCategoryMain.this, navView);
+        setupDrawerContent(navView);
 
         Bundle extras = getIntent().getExtras();
         final String id = extras.getString("idSubCat");

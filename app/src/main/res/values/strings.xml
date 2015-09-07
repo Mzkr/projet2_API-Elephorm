@@ -11,6 +11,10 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="title_activity_main">Formations</string>
+    <string name="title_historique_main">Historique</string>
+    <string name="title_Category_main">Catégories</string>
+    <string name="title_SubCategory_main">Sous-Catégories</string>
+    <string name="title_video_main">Vidéo</string>
     <string name="title_activity_creations">Creations</string>
     <string name="title_activity_creation_detail">CreationDetailActivity</string>
     <string name="title_activity_log">LogActivity</string>

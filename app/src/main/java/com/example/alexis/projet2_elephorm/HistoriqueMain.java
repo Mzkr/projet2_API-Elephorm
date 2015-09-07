@@ -7,6 +7,9 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -24,7 +27,11 @@ import java.util.List;
 /**
  * Created by Alexis on 07/09/2015.
  */
-public class HistoriqueMain extends Activity {
+public class HistoriqueMain extends NavigationDrawerSetup {
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar;
+    private NavigationView navView;
+
     private ProgressDialog pDialog;
     private static final String STORAGE_DATA = "storageData";
     private SharedPreferences storageDataVideo;
@@ -38,6 +45,16 @@ public class HistoriqueMain extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.historique_main);
+        setTitle(R.string.title_historique_main);
+        // Set a Toolbar to replace the ActionBar.
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Find our drawer view
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // Find our navigation view
+        navView = (NavigationView) findViewById(R.id.nvView);
+
+        configureDrawer(toolbar, mDrawer, HistoriqueMain.this, navView);
+        setupDrawerContent(navView);
 
         all_cat_pref = PreferenceManager.getDefaultSharedPreferences(this);
         String all_cat = all_cat_pref.getString("ALL_CAT", "");
@@ -58,11 +75,13 @@ public class HistoriqueMain extends Activity {
                 JSONArray newJArrayAllCat = new JSONArray(all_cat);
                 JSONObject objetHistorique = new JSONObject(listVideoView);
                 for (Iterator iterator = objetHistorique.keys(); iterator.hasNext();) {
+                    //id de la catégorie vue
                     Object catId = iterator.next();
+                    //id des sousCat et Video
                     Object catVal = objetHistorique.get(String.valueOf(catId));
+                    String listSubCat = "";
                     //récupération des id de subCat
-                    Log.i("OOOOOOOOOOOOOOOOOOOO", String.valueOf(catVal));
-                    JSONArray jaSubCatVue = new JSONArray(catVal);
+                    JSONArray jaSubCatVue = new JSONArray(String.valueOf(catVal));
                     //end id subCat
                     for (int i = 0; i < newJArrayAllCat.length(); i++) {
                         //toutes les catégories
@@ -72,18 +91,28 @@ public class HistoriqueMain extends Activity {
                             //ajout du titre de la catégorie
                             titleCat.setTitle(item.getString("title"));
                             //objet contenant les subCat de la Cat
-                            JSONArray newJArraySubCat = new JSONArray(item.getString("subcategories"));
+                            JSONArray newJArrayAllSubCat = new JSONArray(item.getString("subcategories"));
                             for (int j = 0; j < jaSubCatVue.length(); j++) {
                                 JSONObject itemSubCatVue = jaSubCatVue.getJSONObject(j);
-                                for (Iterator iterator2 = objetHistorique.keys(); iterator2.hasNext();) {
+                                for (Iterator iterator2 = itemSubCatVue.keys(); iterator2.hasNext();) {
+                                    //id de subCat
                                     Object subCatIdVue = iterator2.next();
-                                    for (int k = 0; k < newJArraySubCat.length(); k++) {
+                                    for (int k = 0; k < newJArrayAllSubCat.length(); k++) {
                                         //toutes les souscatégories
-                                        JSONObject itemSubCatAll = newJArraySubCat.getJSONObject(i);
-                                        Log.i("NNNNNNNNNNNNNNNNNNNNNNNNNN", String.valueOf(itemSubCatAll));
+                                        JSONObject itemSubCatAll = newJArrayAllSubCat.getJSONObject(k);
+                                        if(itemSubCatAll.getString("_id").equals(subCatIdVue)){
+                                            Log.i("trolololololol",listSubCat);
+                                            if(listSubCat.equals("")){
+                                                listSubCat = itemSubCatAll.getString("title");
+                                            }else{
+                                                listSubCat = listSubCat + ", " + itemSubCatAll.getString("title");
+                                            }
+                                            break;
+                                        }
                                     }
                                 }
                             }
+                            titleCat.setListSubCat(listSubCat);
                             historiqueListCat.add(titleCat);
                         }
                     }

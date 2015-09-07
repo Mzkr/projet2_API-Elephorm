@@ -51,13 +51,14 @@ public class CustomHistoriqueAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_historique, null);
 
         TextView title = (TextView) convertView.findViewById(R.id.title);
+        TextView list = (TextView) convertView.findViewById(R.id.subcatlist);
 
         // getting movie data for the row
         Historique m = formationsItems.get(position);
 
         // title
         title.setText(m.getTitle());
-
+        list.setText(m.getListSubCat());
         return convertView;
     }
 }
