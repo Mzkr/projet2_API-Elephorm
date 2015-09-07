@@ -90,6 +90,77 @@ public class SubCategoryMain extends NavigationDrawerSetup {
                 CustomVideoAdapter cva = (CustomVideoAdapter) parent.getAdapter();
                 Video woid = (Video) cva.getItem(position);
 
+                // stockage des id de categories dans les sharedpref
+                SharedPreferences.Editor editor = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE).edit();
+                storageDataVideo = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE);
+                String listVideoView = storageDataVideo.getString("ObjetVideoView", null);
+                if (listVideoView != null && !listVideoView.equals("")) {
+                    JSONObject objVideo = null;
+                    try {
+                        objVideo = new JSONObject(listVideoView);
+                        Boolean catExist = false;
+                        Boolean subCatExist = false;
+                        for (Iterator iterator = objVideo.keys(); iterator.hasNext();) {
+                            Object cle = iterator.next();
+                            Object val = objVideo.get(String.valueOf(cle));
+                            if(cle.equals(idCat)){
+                                catExist = true;
+                                JSONArray objSubCat = new JSONArray(String.valueOf(val));
+                                for (int i = 0; i < objSubCat.length(); i++) {
+                                    JSONObject row = objSubCat.getJSONObject(i);
+                                    for (Iterator iterator2 = row.keys(); iterator2.hasNext();) {
+                                        Object cleSubCat = iterator2.next();
+                                        if (cleSubCat.equals(idSubCat)) {
+                                            subCatExist = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if(catExist && !subCatExist){
+                            JSONArray thisCatList =  objVideo.getJSONArray(idCat);
+                            JSONObject thisCatObj = new JSONObject();
+                            thisCatObj.put(idSubCat, "");
+                            thisCatList.put(thisCatObj);
+                            objVideo.put(idCat,thisCatList);
+                            editor.putString("ObjetVideoView", String.valueOf(objVideo));
+                            editor.commit();
+
+                        }else if(!catExist){
+                            JSONObject sbCat = new JSONObject();
+                            sbCat.put(idSubCat, "");
+                            JSONArray jaVideo = new JSONArray();
+                            jaVideo.put(sbCat);
+                            //création objet final pour sharedPref
+                            objVideo.put(idCat,jaVideo);
+                            editor.putString("ObjetVideoView", String.valueOf(objVideo));
+                            editor.commit();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    //création array des sous-cat pour id vidéo
+                    JSONObject sbCat = new JSONObject();
+                    try {
+                        sbCat.put(idSubCat, "");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    JSONArray jaVideo = new JSONArray();
+                    jaVideo.put(sbCat);
+                    //création objet final pour sharedPref
+                    JSONObject objVideo = new JSONObject();
+                    try {
+                        objVideo.put(idCat,jaVideo);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    editor.putString("ObjetVideoView", String.valueOf(objVideo));
+                    editor.commit();
+                }
+
                 if(woid.getField_video() != "") {
                     Intent i = new Intent(SubCategoryMain.this, VideoMain.class);
                     i.putExtra("urlVideo", woid.getField_video());
@@ -167,64 +238,6 @@ public class SubCategoryMain extends NavigationDrawerSetup {
 
                                 // adding formation to formation array
                                 formationsList.add(formation);
-
-                            // stockage des id de categories dans les sharedpref
-                            SharedPreferences.Editor editor = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE).edit();
-                            storageDataVideo = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE);
-                            String listVideoView = storageDataVideo.getString("ObjetVideoView", null);
-                            if (listVideoView != null && !listVideoView.equals("")) {
-                                    JSONObject objVideo = new JSONObject(listVideoView);
-                                    Boolean catExist = false;
-                                    Boolean subCatExist = false;
-                                    for (Iterator iterator = objVideo.keys(); iterator.hasNext();) {
-                                        Object cle = iterator.next();
-                                        Object val = objVideo.get(String.valueOf(cle));
-                                        if(cle.equals(obj.getString("category"))){
-                                            catExist = true;
-                                            JSONArray objSubCat = new JSONArray(String.valueOf(val));
-                                            for (int i = 0; i < objSubCat.length(); i++) {
-                                                JSONObject row = objSubCat.getJSONObject(i);
-                                                for (Iterator iterator2 = row.keys(); iterator2.hasNext();) {
-                                                    Object cleSubCat = iterator2.next();
-                                                    if (cleSubCat.equals(obj.getString("subcategory"))) {
-                                                        subCatExist = true;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    if(catExist && !subCatExist){
-                                        JSONArray thisCatList =  objVideo.getJSONArray(obj.getString("category"));
-                                        JSONObject thisCatObj = new JSONObject();
-                                        thisCatObj.put(obj.getString("subcategory"), "");
-                                        thisCatList.put(thisCatObj);
-                                        objVideo.put(obj.getString("category"),thisCatList);
-                                        editor.putString("ObjetVideoView", String.valueOf(objVideo));
-                                        editor.commit();
-
-                                    }else if(!catExist){
-                                        JSONObject sbCat = new JSONObject();
-                                        sbCat.put(obj.getString("subcategory"), "");
-                                        JSONArray jaVideo = new JSONArray();
-                                        jaVideo.put(sbCat);
-                                        //création objet final pour sharedPref
-                                        objVideo.put(obj.getString("category"),jaVideo);
-                                        editor.putString("ObjetVideoView", String.valueOf(objVideo));
-                                        editor.commit();
-                                    }
-                                }else {
-                                    //création array des sous-cat pour id vidéo
-                                    JSONObject sbCat = new JSONObject();
-                                    sbCat.put(obj.getString("subcategory"), "");
-                                    JSONArray jaVideo = new JSONArray();
-                                    jaVideo.put(sbCat);
-                                    //création objet final pour sharedPref
-                                    JSONObject objVideo = new JSONObject();
-                                    objVideo.put(obj.getString("category"),jaVideo);
-                                    editor.putString("ObjetVideoView", String.valueOf(objVideo));
-                                    editor.commit();
-                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
