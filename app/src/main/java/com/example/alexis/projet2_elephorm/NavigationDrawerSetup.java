@@ -115,11 +115,14 @@ public class NavigationDrawerSetup extends AppCompatActivity {
                     break;
                 }
                 intent = new Intent(activity, CreationsActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 activity.startActivity(intent);
                 break;
             case R.id.nav_third_item:
                 mDrawer.closeDrawers();
+                if(actualItemMenu=="mon compte"){
+                    break;
+                }
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 if (currentUser != null) {
                     intent = new Intent(activity, AccountActivity.class);

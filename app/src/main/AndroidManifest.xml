@@ -56,10 +56,6 @@
             android:label="@string/title_activity_creation_detail" >
         </activity>
         <activity
-            android:name=".LogActivity"
-            android:label="@string/title_activity_log" >
-        </activity>
-        <activity
             android:name=".ConnexionActivity"
             android:label="@string/title_activity_connexion" >
         </activity>

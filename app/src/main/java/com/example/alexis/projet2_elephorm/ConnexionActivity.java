@@ -3,7 +3,6 @@ package com.example.alexis.projet2_elephorm;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.alexis.projet2_elephorm.model.Category;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -23,9 +21,6 @@ public class ConnexionActivity extends NavigationDrawerSetup {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView navView;
-    private String mUsername;
-    private String mPassword;
-    private String mEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +37,13 @@ public class ConnexionActivity extends NavigationDrawerSetup {
         configureDrawer(toolbar, mDrawer, ConnexionActivity.this, navView);
         setupDrawerContent(navView);
 
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            Intent i = new Intent(ConnexionActivity.this, AccountActivity.class);
+            startActivity(i);
+        } else {
+        }
+
     }
 
     @Override
@@ -53,16 +55,12 @@ public class ConnexionActivity extends NavigationDrawerSetup {
 
     public void connect(View view) {
 
-        EditText usernameET = (EditText) findViewById(R.id.username);
-        mUsername = usernameET.getText().toString().trim();
-        EditText passwordET = (EditText) findViewById(R.id.password);
-        mPassword = usernameET.getText().toString().trim();
-        if(findViewById(R.id.email) != null) {
-            EditText emailET = (EditText) findViewById(R.id.email);
-            mEmail = emailET.getText().toString().trim();
-        }
+        EditText usernameET = (EditText) findViewById(R.id.usernameConnect);
+        String username = usernameET.getText().toString().trim();
+        EditText passwordET = (EditText) findViewById(R.id.passwordConnect);
+        String password = usernameET.getText().toString().trim();
 
-        ParseUser.logInInBackground(mUsername, mPassword, new LogInCallback() {
+        ParseUser.logInInBackground(username, password, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
                     Intent i = new Intent(ConnexionActivity.this, MainActivity.class);
@@ -76,19 +74,17 @@ public class ConnexionActivity extends NavigationDrawerSetup {
 
     public void createAccount(View view) {
 
-        EditText usernameET = (EditText) findViewById(R.id.username);
-        mUsername = usernameET.getText().toString().trim();
-        EditText passwordET = (EditText) findViewById(R.id.password);
-        mPassword = usernameET.getText().toString().trim();
-        if(findViewById(R.id.email) != null) {
-            EditText emailET = (EditText) findViewById(R.id.email);
-            mEmail = emailET.getText().toString().trim();
-        }
+        EditText usernameET = (EditText) findViewById(R.id.usernameSignup);
+        String username = usernameET.getText().toString().trim();
+        EditText passwordET = (EditText) findViewById(R.id.passwordSignup);
+        String password = usernameET.getText().toString().trim();
+        EditText emailET = (EditText) findViewById(R.id.emailSignup);
+        String email = emailET.getText().toString().trim();
 
         ParseUser user = new ParseUser();
-        user.setUsername(mUsername);
-        user.setPassword(mPassword);
-        user.setEmail(mEmail);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
 
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {

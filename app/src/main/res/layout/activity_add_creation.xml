@@ -27,19 +27,62 @@
                 android:layout_height="match_parent"
                 android:onClick="connect">
 
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/creationTitle"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:hint="titre de la création" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/creationUrl"
+                    android:layout_below="@+id/creationTitle"
+                    android:layout_alignLeft="@+id/creationTitle"
+                    android:layout_alignStart="@+id/creationTitle"
+                    android:layout_alignRight="@+id/creationTitle"
+                    android:layout_alignEnd="@+id/creationTitle"
+                    android:hint="url de la création" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/creationCategorySpinner"
+                    android:layout_below="@+id/textView3"
+                    android:layout_alignLeft="@+id/creationUrl"
+                    android:layout_alignStart="@+id/creationUrl"
+                    android:layout_alignRight="@+id/creationUrl"
+                    android:layout_alignEnd="@+id/creationUrl" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="add creation activity"
+                    android:text="Selectionnez une catégorie :"
                     android:id="@+id/textView3"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-            </RelativeLayout><![CDATA[
+                    android:layout_below="@+id/creationUrl"
+                    android:layout_alignLeft="@+id/creationUrl"
+                    android:layout_alignStart="@+id/creationUrl" />
 
-            />
-        ]]>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Créer"
+                    android:id="@+id/addCreationButton"
+                    android:layout_below="@+id/creationCategorySpinner"
+                    android:layout_alignRight="@+id/creationCategorySpinner"
+                    android:layout_alignEnd="@+id/creationCategorySpinner"
+                    android:layout_marginTop="30dp"
+                    android:onClick="addCreation" />
+            </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
 

@@ -96,7 +96,7 @@ public class MainActivity extends NavigationDrawerSetup {
 
         // Creating volley request obj
         JsonArrayRequest formationReq = new JsonArrayRequest(url,
-                        new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, response.toString());
