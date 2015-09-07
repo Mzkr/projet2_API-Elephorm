@@ -5,26 +5,33 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="vertical" android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
         <!-- The ActionBar -->
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="250dp"
-            android:id="@+id/formation" />
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:id="@+id/videoList"
-            android:clickable="true"
-            android:smoothScrollbar="true" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical" android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:id="@+id/formation"
+                android:layout_gravity="center_horizontal" />
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/videoList"
+                android:clickable="true"
+                android:smoothScrollbar="true"
+                android:layout_below="@+id/formation"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <!-- The navigation drawer -->

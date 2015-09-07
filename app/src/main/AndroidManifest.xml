@@ -40,7 +40,8 @@
         </activity>
         <activity
             android:name=".VideoMain"
-            android:label="VideoMain" >
+            android:label="VideoMain"
+            android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

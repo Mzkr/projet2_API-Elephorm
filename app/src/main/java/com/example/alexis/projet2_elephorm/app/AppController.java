@@ -1,7 +1,6 @@
 package com.example.alexis.projet2_elephorm.app;
 
 import android.app.Application;
-import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.volley.Request;

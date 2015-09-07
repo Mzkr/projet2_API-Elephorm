@@ -1,7 +1,7 @@
 package com.example.alexis.projet2_elephorm;
 
 
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,6 +33,7 @@ public class CategoryMain extends NavigationDrawerSetup {
     private Toolbar toolbar;
     private NavigationView navView;
 
+    private ProgressDialog pDialog;
     private SharedPreferences preferences;
     private CustomListAdapter adapter;
     private List<Category> formationsListSubCat = new ArrayList<Category>();
@@ -49,6 +50,11 @@ public class CategoryMain extends NavigationDrawerSetup {
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         // Find our navigation view
         navView = (NavigationView) findViewById(R.id.nvView);
+
+        pDialog = new ProgressDialog(this);
+        // Showing progress dialog before making http request
+        pDialog.setMessage("Chargement...");
+        pDialog.show();
 
         configureDrawer(toolbar, mDrawer, CategoryMain.this, navView);
         setupDrawerContent(navView);
@@ -112,11 +118,12 @@ public class CategoryMain extends NavigationDrawerSetup {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-       /* TextView tv = new TextView(this);
-        tv.setText("Hello, "+jsonArray+" !!");
-        setContentView(tv);*/
-
-
+        hidePDialog();
+    }
+    private void hidePDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
     }
 }

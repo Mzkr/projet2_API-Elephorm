@@ -87,7 +87,7 @@ public class MainActivity extends NavigationDrawerSetup {
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
-        pDialog.setMessage("Loading...");
+        pDialog.setMessage("Chargement...");
         pDialog.show();
 
         // changing action bar color

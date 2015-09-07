@@ -1,7 +1,6 @@
 package com.example.alexis.projet2_elephorm;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -60,7 +59,7 @@ public class HistoriqueMain extends NavigationDrawerSetup {
         String all_cat = all_cat_pref.getString("ALL_CAT", "");
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
-        pDialog.setMessage("Loading...");
+        pDialog.setMessage("Chargement...");
         pDialog.show();
 
         listViewCat = (ListView) findViewById(R.id.list_historique_main);
@@ -69,7 +68,6 @@ public class HistoriqueMain extends NavigationDrawerSetup {
 
         storageDataVideo = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE);
         final String listVideoView = storageDataVideo.getString("ObjetVideoView", null);
-        Log.i("??????????????", listVideoView);
         if (listVideoView != null && !listVideoView.equals("")) {
             try {
                 JSONArray newJArrayAllCat = new JSONArray(all_cat);

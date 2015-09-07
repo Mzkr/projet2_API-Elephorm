@@ -58,12 +58,20 @@ public class VideoMain  extends NavigationDrawerSetup {
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        VideoView teaser =(VideoView)findViewById(R.id.video_view);
+        final VideoView teaser =(VideoView)findViewById(R.id.video_view);
         // video
         teaser.setMediaController(media_Controller);
         teaser.setVideoPath(urlVideo);
         teaser.start();
-        hidePDialog();
+        teaser.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+               hidePDialog();
+                teaser.setFocusable(true);
+                teaser.start();
+            }
+        });
 
         // stockage des id de categories dans les sharedpref
         final SharedPreferences.Editor editor = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE).edit();

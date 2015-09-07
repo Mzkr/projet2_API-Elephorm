@@ -1,7 +1,5 @@
 package com.example.alexis.projet2_elephorm.model;
 
-import java.util.ArrayList;
-
 /**
  * Created by Alexis on 10/08/2015.
  */
