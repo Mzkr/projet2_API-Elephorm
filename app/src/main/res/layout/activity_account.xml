@@ -25,17 +25,19 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:onClick="connect">
+                android:onClick="connect" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Compte connecté :"
+                    android:text="Bienvenue, "
                     android:id="@+id/textView2"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -43,9 +45,11 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Medium Text"
                     android:id="@+id/username"
-                    android:layout_below="@+id/textView2"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentTop="false"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:layout_toEndOf="@+id/textView2"
+                    android:layout_alignBottom="@+id/textView2"
+                    android:textColor="#000000" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -53,7 +57,8 @@
                     android:text="Se déconnecter"
                     android:id="@+id/logoutButton"
                     android:layout_below="@+id/username"
-                    android:layout_marginTop="56dp" />
+                    android:layout_marginTop="56dp"
+                    android:layout_marginLeft="20dp" />
             </RelativeLayout>
         </FrameLayout>
     </LinearLayout>

@@ -64,6 +64,7 @@ public class ConnexionActivity extends NavigationDrawerSetup {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
                     Intent i = new Intent(ConnexionActivity.this, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(i);
                 } else {
                     Log.d("•••••", "error : " + e.getMessage());
@@ -89,7 +90,8 @@ public class ConnexionActivity extends NavigationDrawerSetup {
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-                    Intent i = new Intent(ConnexionActivity.this, CategoryMain.class);
+                    Intent i = new Intent(ConnexionActivity.this, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(i);
                 } else {
                    Log.d("•••••", "error : " + e.getMessage());

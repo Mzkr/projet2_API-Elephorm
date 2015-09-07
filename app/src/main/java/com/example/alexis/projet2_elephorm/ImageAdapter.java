@@ -26,8 +26,6 @@ public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private List<ParseObject> creationsList;
 
-    //TODO replace mThumbIds by creationsList
-
     public ImageAdapter(Context c, List<ParseObject> creations) {
         mContext = c;
         creationsList = creations;
@@ -52,8 +50,6 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
-            //imageView.setLayoutParams(new GridView.LayoutParams((int) mContext.getResources().getDimension(R.dimen.creation_thumb_width), (int) mContext.getResources().getDimension(R.dimen.creation_thumb_height)));
-            //imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(0,0,0,0);
         } else {
@@ -61,11 +57,7 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         try {
-            //URL url = new URL(creationsList.get(position).getString("url"));
-            //Picasso.with(mContext).load(creationsList.get(position).getString("url")).centerCrop().into(imageView);
             Picasso.with(mContext).load(creationsList.get(position).getString("url")).resize((int) mContext.getResources().getDimension(R.dimen.creation_thumb_width), (int) mContext.getResources().getDimension(R.dimen.creation_thumb_height)).centerCrop().into(imageView);
-            //Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            //imageView.setImageBitmap(bmp);
         }catch(Exception e){
             Log.d("•••••", "message : " + e.getMessage());
         }
@@ -74,19 +66,4 @@ public class ImageAdapter extends BaseAdapter {
         //imageView.setImageResource(mThumbIds[position]);
         return imageView;
     }
-
-    // references to our images
-    private Integer[] mThumbIds = {
-           /* R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7*/
-    };
 }
