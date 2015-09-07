@@ -1,6 +1,7 @@
 package com.example.alexis.projet2_elephorm;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
@@ -35,7 +36,8 @@ public class AccountActivity extends NavigationDrawerSetup {
         setupDrawerContent(navView);
 
 
-        TextView username = (TextView) findViewById(R.id.usernameConnect);
+        TextView username = (TextView) findViewById(R.id.username);
+        username.setTypeface(null, Typeface.BOLD);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {

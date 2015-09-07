@@ -51,7 +51,7 @@ public class CreationsActivity extends NavigationDrawerSetup {
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
-                    if(list.size() > 0){
+                    if(list.size() > 0) {
                         for (int i = 0; i < list.size(); i++) {
                             creationsList.add(i, list.get(i));
                         }

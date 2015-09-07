@@ -52,18 +52,22 @@ public class CreationDetailActivity extends NavigationDrawerSetup {
 
         NetworkImageView image = (NetworkImageView) findViewById(R.id.creationImage);
         TextView creationTitle = (TextView) findViewById(R.id.creationTitle);
-        creationTitle.setTypeface(null, Typeface.BOLD_ITALIC);
+        creationTitle.setTypeface(null, Typeface.BOLD);
         TextView creationAuthor = (TextView) findViewById(R.id.creationAuthor);
         TextView creationLikeCount = (TextView) findViewById(R.id.creationLikeCount);
         TextView creationLikeLabel = (TextView) findViewById(R.id.creationLikeLabel);
-        TextView creationCategories = (TextView) findViewById(R.id.creationCategories);
+        TextView creationCategory = (TextView) findViewById(R.id.creationCategories);
+        creationCategory.setTypeface(null, Typeface.BOLD);
+        TextView creationDescription = (TextView) findViewById(R.id.creationDescription);
+
         creationTitle.setText(creation.getString("title"));
         creationAuthor.setText(creation.getParseUser("user").getString("username"));
         creationLikeCount.setText("" + creation.getInt("likes"));
         if(creation.getInt("likes") > 1){
             creationLikeLabel.setText("likes");
         }
-        creationCategories.setText(creation.getString("category"));
+        creationCategory.setText(creation.getString("category"));
+        creationDescription.setText(creation.getString("description"));
         image.setImageUrl(creation.getString("url"), imageLoader);
         //android.view.ViewGroup.LayoutParams layoutParams = image.getLayoutParams();
         //layoutParams.height = image.getMeasuredWidth();
