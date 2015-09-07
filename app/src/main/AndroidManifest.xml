@@ -56,8 +56,13 @@
             android:label="@string/title_activity_creation_detail" >
         </activity>
         <activity
-            android:name=".LogActivity"
-            android:label="@string/title_activity_log" >
+            android:name=".HistoriqueMain"
+            android:label="HistoriqueMain" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ConnexionActivity"

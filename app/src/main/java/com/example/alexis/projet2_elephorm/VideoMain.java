@@ -52,7 +52,7 @@ public class VideoMain  extends Activity {
         storageDataVideo = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE);
         final String listVideoView = storageDataVideo.getString("ObjetVideoView", null);
 
-        if (!listVideoView.equals("") ) {
+        if (listVideoView != null && !listVideoView.equals("")) {
             teaser.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {

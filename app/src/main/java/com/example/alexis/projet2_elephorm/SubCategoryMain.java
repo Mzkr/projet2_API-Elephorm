@@ -156,7 +156,7 @@ public class SubCategoryMain extends Activity {
                             SharedPreferences.Editor editor = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE).edit();
                             storageDataVideo = getSharedPreferences(STORAGE_DATA, MODE_PRIVATE);
                             String listVideoView = storageDataVideo.getString("ObjetVideoView", null);
-                            if (!listVideoView.equals("") ) {
+                            if (listVideoView != null && !listVideoView.equals("")) {
                                     JSONObject objVideo = new JSONObject(listVideoView);
                                     Boolean catExist = false;
                                     Boolean subCatExist = false;

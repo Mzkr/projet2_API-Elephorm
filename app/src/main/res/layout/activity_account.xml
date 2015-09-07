@@ -54,10 +54,7 @@
                     android:id="@+id/logoutButton"
                     android:layout_below="@+id/username"
                     android:layout_marginTop="56dp" />
-            </RelativeLayout><![CDATA[
-
-            />
-        ]]>
+            </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
 
