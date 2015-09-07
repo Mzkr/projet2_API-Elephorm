@@ -42,6 +42,26 @@
             android:name=".CreationsActivity"
             android:label="@string/title_activity_creations" >
         </activity>
+        <activity
+            android:name=".CreationDetailActivity"
+            android:label="@string/title_activity_creation_detail" >
+        </activity>
+        <activity
+            android:name=".LogActivity"
+            android:label="@string/title_activity_log" >
+        </activity>
+        <activity
+            android:name=".ConnexionActivity"
+            android:label="@string/title_activity_connexion" >
+        </activity>
+        <activity
+            android:name=".AccountActivity"
+            android:label="@string/title_activity_account" >
+        </activity>
+        <activity
+            android:name=".AddCreationActivity"
+            android:label="@string/title_activity_add_creation" >
+        </activity>
     </application>
 
 </manifest>

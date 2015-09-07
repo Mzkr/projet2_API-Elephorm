@@ -12,6 +12,6 @@
             android:title="@string/title_activity_second" />
         <item
             android:id="@+id/nav_third_item"
-            android:title="Third" />
+            android:title="Mon compte" />
     </group>
 </menu>
