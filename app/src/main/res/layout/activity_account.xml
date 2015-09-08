@@ -58,7 +58,8 @@
                     android:id="@+id/logoutButton"
                     android:layout_below="@+id/username"
                     android:layout_marginTop="56dp"
-                    android:layout_marginLeft="20dp" />
+                    android:layout_marginLeft="20dp"
+                    android:onClick="logout" />
             </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
