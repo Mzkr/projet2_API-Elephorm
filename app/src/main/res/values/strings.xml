@@ -16,7 +16,7 @@
     <string name="title_SubCategory_main">Sous-Catégories</string>
     <string name="title_video_main">Vidéo</string>
     <string name="title_activity_creations">Creations</string>
-    <string name="title_activity_creation_detail">CreationDetailActivity</string>
+    <string name="title_activity_creation_detail">Détail de la création</string>
     <string name="title_activity_log">LogActivity</string>
     <string name="title_activity_connexion">Mon Compte</string>
     <string name="title_activity_account">AccountActivity</string>
