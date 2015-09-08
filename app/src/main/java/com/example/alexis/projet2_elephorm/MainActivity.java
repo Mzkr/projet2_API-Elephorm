@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -90,10 +91,6 @@ public class MainActivity extends NavigationDrawerSetup {
         pDialog.setMessage("Chargement...");
         pDialog.show();
 
-        // changing action bar color
-        // getActionBar().setBackgroundDrawable(
-        //       new ColorDrawable(Color.parseColor("#1b1b1b")));
-
         // Creating volley request obj
         JsonArrayRequest formationReq = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
@@ -121,6 +118,8 @@ public class MainActivity extends NavigationDrawerSetup {
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                Toast.makeText(getApplicationContext(),
+                                        "Problème réseau, essayer ultérieurement", Toast.LENGTH_LONG).show();
                             }
 
                         }

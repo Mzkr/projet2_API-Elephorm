@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -136,6 +137,8 @@ public class SubCategoryMain extends NavigationDrawerSetup {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        Toast.makeText(getApplicationContext(),
+                                "Problème réseau, essayer ultérieurement", Toast.LENGTH_LONG).show();
                     }
                 }else {
                     //création array des sous-cat pour id vidéo
@@ -238,6 +241,8 @@ public class SubCategoryMain extends NavigationDrawerSetup {
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                Toast.makeText(getApplicationContext(),
+                                        "Problème réseau, essayer ultérieurement", Toast.LENGTH_LONG).show();
                             }
 
                         // notifying list adapter about data changes
