@@ -55,7 +55,7 @@ public class VideoMain  extends NavigationDrawerSetup {
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
-        pDialog.setMessage("Loading...");
+        pDialog.setMessage("Chargement...");
         pDialog.show();
 
         final VideoView teaser =(VideoView)findViewById(R.id.video_view);

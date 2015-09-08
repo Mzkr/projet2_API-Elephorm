@@ -18,7 +18,7 @@
     <string name="title_activity_creations">Creations</string>
     <string name="title_activity_creation_detail">CreationDetailActivity</string>
     <string name="title_activity_log">LogActivity</string>
-    <string name="title_activity_connexion">ConnexionActivity</string>
+    <string name="title_activity_connexion">Mon Compte</string>
     <string name="title_activity_account">AccountActivity</string>
     <string name="title_activity_add_creation">AddCreationActivity</string>
 
